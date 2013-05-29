@@ -120,17 +120,15 @@ public class OracleDatePlainJdbcTest
         System.out.println("Date: " + nowDate + " (" + nowDate.getTime() + " ms since Epoch), calendar: " +
             (cal == null ? null : cal.getTimeZone().getID()));
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         Timestamp nowTimestamp = new Timestamp(nowDate.getTime());
         PreparedStatement insertStmt = conn.prepareStatement(
             "INSERT INTO DATE_TEST_TABLE"
                 + " (ID, DATE_COLUMN, TIMESTAMP_COLUMN)"
-                + " VALUES (?, to_date(?, 'yyyy/mm/dd hh24:mi:ss'), ?)");
+                + " VALUES (?, ?, ?)");
         try
         {
             insertStmt.setInt(1, getSerial());
-            insertStmt.setString(2, dateFormat.format(nowDate));
+            insertStmt.setTimestamp(2, nowTimestamp, cal);
             insertStmt.setTimestamp(3, nowTimestamp, cal);
             insertStmt.executeUpdate();
         }
