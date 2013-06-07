@@ -22,8 +22,7 @@ Insert into TEST_TABLE (ID,NEW_ID,LOCKVERSION,DESCRIPTION,NAME) values ('E0074DD
 
 @Entity
 @Table(name = "TEST_TABLE")
-//public class TestEntity extends JpaDomainEntity
-public class TestEntity extends WorkingJpaDomainEntity
+public class TestEntity extends JpaDomainEntity
 {
     public TestEntity()
     {

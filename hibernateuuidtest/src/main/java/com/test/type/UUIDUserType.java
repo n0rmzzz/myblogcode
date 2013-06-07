@@ -42,13 +42,29 @@ public class UUIDUserType implements UserType
     public Object nullSafeGet(ResultSet resultSet, String[] strings, SessionImplementor sessionImplementor, Object o)
         throws HibernateException, SQLException
     {
-        return null;
+        byte[] value = resultSet.getBytes(strings[0]);
+        if (value == null)
+            return null;
+        else
+            return UUID.fromBytes(value);
     }
 
     @Override
     public void nullSafeSet(PreparedStatement preparedStatement, Object o, int i, SessionImplementor sessionImplementor)
         throws HibernateException, SQLException
     {
+        if (o == null)
+        {
+            preparedStatement.setNull(i, Types.BINARY);
+            return;
+        }
+
+        if (!UUID.class.isAssignableFrom(o.getClass()))
+        {
+            throw new HibernateException(o.getClass().toString() + " : cast exception");
+        }
+
+        preparedStatement.setBytes(i, ((UUID)o).toBytes());
     }
 
     public Object deepCopy(Object value)
