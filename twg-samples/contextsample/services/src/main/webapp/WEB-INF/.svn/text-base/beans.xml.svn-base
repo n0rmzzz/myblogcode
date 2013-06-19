@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
+
+
+	<!-- XML-RPC Services -->
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:contextsample-services.properties</value>
+		</property>
+	</bean>
+
+	<bean id="sampleService" class="com.tinywebgears.samples.service.SampleServiceImpl">
+		<constructor-arg index="0">
+			<jee:jndi-lookup jndi-name="config/environment" />
+		</constructor-arg>
+		<constructor-arg index="1" value="${product.name}" />
+		<constructor-arg index="2" value="${product.version}" />
+		<constructor-arg index="3" value="${product.svn.revision}" />
+	</bean>
+
+	<!-- Processor Factory -->
+
+	<bean id="requestProcessorFactory"
+		class="com.tinywebgears.samples.xmlrpc.ConfiguredBeanProcessorFactory">
+		<property name="classBeanMap">
+			<map>
+				<entry key="com.tinywebgears.samples.service.SampleService"
+					value-ref="sampleService" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- Controller -->
+
+	<bean id="xmlRpcHandler" class="com.tinywebgears.samples.xmlrpc.XmlRpcServerController">
+		<property name="factory" ref="requestProcessorFactory" />
+		<property name="mappings">
+			<props>
+				<prop key="sampleService">com.tinywebgears.samples.service.SampleService</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!-- Dispatcher -->
+
+	<bean id="simpleUrlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+
+		<property name="mappings">
+			<props>
+				<prop key="/xmlrpc/">xmlRpcHandler</prop>
+			</props>
+		</property>
+
+	</bean>
+
+	<context:component-scan base-package="com.tinywebgears.samples" />
+
+</beans>

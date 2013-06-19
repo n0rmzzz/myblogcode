@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="10dp" >
+	</LinearLayout>
+    
+    <EditText
+        android:id="@+id/emailtextbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10" >
+    </EditText>
+
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content">
+
+	    <Button
+	        android:id="@+id/saveemailbutton"
+	        android:layout_width="200dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/send_sample_email"
+            android:layout_alignParentRight="true" />
+	    	    
+    </RelativeLayout>
+
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="10dp" >
+	</LinearLayout>
+    
+    <TextView
+        android:id="@+id/oauthresult"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"/>
+
+    <EditText
+        android:id="@+id/oauthemailtextbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:ems="10" >
+    </EditText>
+
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/configoauthbutton"
+	        android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/configure_oauth"
+            android:layout_alignParentRight="true" />
+
+        <Button
+            android:id="@+id/clearoauthbutton"
+	        android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_oauth"
+            android:layout_toLeftOf="@id/configoauthbutton" />
+        
+    </RelativeLayout>
+    
+</LinearLayout>

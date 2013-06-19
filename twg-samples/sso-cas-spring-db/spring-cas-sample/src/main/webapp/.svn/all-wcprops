@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/54/trunk/sso-cas-spring-db/spring-cas-sample/src/main/webapp
+END
+authfailed.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/53/trunk/sso-cas-spring-db/spring-cas-sample/src/main/webapp/authfailed.jsp
+END
+index.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/53/trunk/sso-cas-spring-db/spring-cas-sample/src/main/webapp/index.jsp
+END
+denied.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/53/trunk/sso-cas-spring-db/spring-cas-sample/src/main/webapp/denied.jsp
+END
+cas-logout.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/53/trunk/sso-cas-spring-db/spring-cas-sample/src/main/webapp/cas-logout.jsp
+END

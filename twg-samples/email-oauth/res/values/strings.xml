@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GMail OAuth Demo</string>
+    <string name="send_sample_email">Send Test Email</string>
+    <string name="configure_oauth">Set Up</string>
+    <string name="clear_oauth">Clear</string>
+    <string name="oauth_not_set_up">Please set up email gateway.</string>
+    <string name="oauth_set_up">Email gateway is set up.</string>
+    <string name="fetch_info">Fetch Extra Info</string>
+    <string name="oauth_intro">Currently we only support OAuth protocol for Google. Please press the button below, then give grants to use your Gmail account to send emails.\n</string>
+    <string name="oauth_success">Authorization was successful. Now you can continue to the main page.\n</string>
+    <string name="oauth_error">An error occurred while authenticating/authorising, please contact us at info@tinywebgears.com for help.\n</string>
+    <string name="oauth_google">Go to Google</string>
+    <string name="return_main">Continue</string>
+    <string name="error_internal">An internal error occurred while sending email: %s</string>
+    <string name="email_subject">From %s</string>
+    <string name="please_wait">Please wait...</string>
+
+</resources>

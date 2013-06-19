@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/52/trunk/sso-cas-spring/cas-server/src/main/java/org/jasig/services/persondir/support/ldap
+END
+LdapPersonAttributeAndRoleDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/!svn/ver/52/trunk/sso-cas-spring/cas-server/src/main/java/org/jasig/services/persondir/support/ldap/LdapPersonAttributeAndRoleDao.java
+END

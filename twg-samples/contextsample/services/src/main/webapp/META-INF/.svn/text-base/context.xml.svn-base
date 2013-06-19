@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Context configuration file for the Data Library XML-RPC services -->
+
+<Context docBase="${catalina.home}/webapps/contextsample-services"
+	privileged="true" antiResourceLocking="false" antiJARLocking="false">
+
+	<!-- Define parameters -->
+	<Environment name="config/environment" value="prod 1"
+		type="java.lang.String" override="true" />
+
+</Context>

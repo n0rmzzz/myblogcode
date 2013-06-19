@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/56/trunk/customauth/src/main/webapp/WEB-INF
+END
+applicationContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/56/trunk/customauth/src/main/webapp/WEB-INF/applicationContext.xml
+END
+applicationContext-security.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/11/trunk/customauth/src/main/webapp/WEB-INF/applicationContext-security.xml
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/11/trunk/customauth/src/main/webapp/WEB-INF/web.xml
+END
+customauth-servlet.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/11/trunk/customauth/src/main/webapp/WEB-INF/customauth-servlet.xml
+END

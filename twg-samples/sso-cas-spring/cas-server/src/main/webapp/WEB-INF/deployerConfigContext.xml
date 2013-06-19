@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+    <!--
+         | This bean declares our AuthenticationManager.  The CentralAuthenticationService service bean
+         | declared in applicationContext.xml picks up this AuthenticationManager by reference to its id,
+         | "authenticationManager".  Most deployers will be able to use the default AuthenticationManager
+         | implementation and so do not need to change the class of this bean.  We include the whole
+         | AuthenticationManager here in the userConfigContext.xml so that you can see the things you will
+         | need to change in context.
+         +-->
+    <bean id="authenticationManager"
+          class="org.jasig.cas.authentication.AuthenticationManagerImpl">
+        <!--
+              | This is the List of CredentialToPrincipalResolvers that identify what Principal is trying to authenticate.
+              | The AuthenticationManagerImpl considers them in order, finding a CredentialToPrincipalResolver which
+              | supports the presented credentials.
+              |
+              | AuthenticationManagerImpl uses these resolvers for two purposes.  First, it uses them to identify the Principal
+              | attempting to authenticate to CAS /login .  In the default configuration, it is the DefaultCredentialsToPrincipalResolver
+              | that fills this role.  If you are using some other kind of credentials than UsernamePasswordCredentials, you will need to replace
+              | DefaultCredentialsToPrincipalResolver with a CredentialsToPrincipalResolver that supports the credentials you are
+              | using.
+              |
+              | Second, AuthenticationManagerImpl uses these resolvers to identify a service requesting a proxy granting ticket.
+              | In the default configuration, it is the HttpBasedServiceCredentialsToPrincipalResolver that serves this purpose.
+              | You will need to change this list if you are identifying services by something more or other than their callback URL.
+              +-->
+        <property name="credentialsToPrincipalResolvers">
+            <list>
+                <bean class="org.jasig.cas.authentication.principal.CredentialsToLDAPAttributePrincipalResolver">
+                    <!-- The Principal resolver form the credentials -->
+                    <property name="credentialsToPrincipalResolver">
+                        <bean class="org.jasig.cas.authentication.principal.UsernamePasswordCredentialsToPrincipalResolver"/>
+                    </property>
+                    <!-- The query made to find the Principal ID. "%u" will be replaced by the resolved Principal -->
+                    <property name="filter" value="(uid=%u)"/>
+                    <!-- The attribute used to define the new Principal ID -->
+                    <property name="principalAttributeName" value="cn"/>
+                    <property name="searchBase" value="ou=users,ou=system"/>
+                    <property name="contextSource" ref="contextSource"/>
+                    <property name="attributeRepository">
+                        <ref bean="attributeRepository"/>
+                    </property>
+                </bean>
+                <!--
+                        | HttpBasedServiceCredentialsToPrincipalResolver supports HttpBasedCredentials.  It supports the CAS 2.0 approach of
+                        | authenticating services by SSL callback, extracting the callback URL from the Credentials and representing it as a
+                        | SimpleService identified by that callback URL.
+                        |
+                        | If you are representing services by something more or other than an HTTPS URL whereat they are able to
+                        | receive a proxy callback, you will need to change this bean declaration (or add additional declarations).
+                        +-->
+                <bean
+                        class="org.jasig.cas.authentication.principal.HttpBasedServiceCredentialsToPrincipalResolver"/>
+            </list>
+        </property>
+
+        <!--
+              | Whereas CredentialsToPrincipalResolvers identify who it is some Credentials might authenticate,
+              | AuthenticationHandlers actually authenticate credentials.  Here we declare the AuthenticationHandlers that
+              | authenticate the Principals that the CredentialsToPrincipalResolvers identified.  CAS will try these handlers in turn
+              | until it finds one that both supports the Credentials presented and succeeds in authenticating.
+              +-->
+        <property name="authenticationHandlers">
+            <list>
+                <!--
+                        | This is the authentication handler that authenticates services by means of callback via SSL, thereby validating
+                        | a server side SSL certificate.
+                        +-->
+                <bean class="org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler"
+                      p:httpClient-ref="httpClient"/>
+                <bean class="org.jasig.cas.adaptors.ldap.BindLdapAuthenticationHandler">
+                    <property name="filter" value="uid=%u"/>
+                    <property name="searchBase" value="ou=users,ou=system"/>
+                    <property name="contextSource" ref="contextSource"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="contextSource" class="org.springframework.ldap.core.support.LdapContextSource">
+        <property name="pooled" value="false"/>
+        <property name="urls">
+            <list>
+                <value>ldap://localhost:10389</value>
+            </list>
+        </property>
+        <property name="userDn" value="uid=admin,ou=system"/>
+        <property name="password" value="secret"/>
+        <property name="baseEnvironmentProperties">
+            <map>
+                <entry>
+                    <key>
+                        <value>java.naming.security.authentication</value>
+                    </key>
+                    <value>simple</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="userDetailsService"
+          class="org.springframework.security.cas.userdetails.GrantedAuthorityFromAssertionAttributesUserDetailsService">
+        <constructor-arg>
+            <list>
+                <value>authorities</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="attributeRepository" class="org.jasig.services.persondir.support.ldap.LdapPersonAttributeAndRoleDao">
+        <property name="contextSource" ref="contextSource"/>
+        <property name="baseDN" value="ou=users,ou=system"/>
+        <property name="requireAllQueryAttributes" value="true"/>
+        <!-- Attribute mapping between principal (key) and LDAP (value) names used to perform the LDAP search.
+By default, multiple search criteria are ANDed together.  Set the queryType property to change to OR. -->
+        <property name="queryAttributeMapping">
+            <map>
+                <entry key="username" value="uid"/>
+            </map>
+        </property>
+        <property name="resultAttributeMapping">
+            <map>
+                <!-- Mapping beetween LDAP entry attributes (key) and Principal's (value) -->
+                <entry key="mail" value="email"/>
+                <entry key="authorities" value="authorities"/>
+            </map>
+        </property>
+        <property name="ldapAuthoritiesPopulator" ref="ldapAuthoritiesPopulator"/>
+    </bean>
+
+    <bean id="ldapAuthoritiesPopulator"
+          class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
+        <constructor-arg ref="contextSource"/>
+        <constructor-arg value="ou=groups,ou=system"/>
+        <property name="groupRoleAttribute" value="cn"/>
+        <property name="groupSearchFilter" value="(uniqueMember={0})"/>
+    </bean>
+
+
+    <bean id="serviceRegistryDao" class="org.jasig.cas.services.JpaServiceRegistryDaoImpl"
+          p:entityManagerFactory-ref="entityManagerFactory"/>
+    <!-- This is the EntityManagerFactory configuration for Hibernate -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="generateDdl" value="true"/>
+                <property name="showSql" value="false"/>
+            </bean>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${database.url}"/>
+        <property name="username" value="${database.username}"/>
+        <property name="password" value="${database.password}"/>
+        <property name="validationQuery" value="select 1"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="defaultAutoCommit" value="false"/>
+    </bean>
+
+    <bean id="auditTrailManager" class="com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager"/>
+
+</beans>

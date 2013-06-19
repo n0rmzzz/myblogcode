@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/11/trunk/customauth/src/main/java/com/tinywebgears/samples/customauth/service
+END
+UmsLogoutFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/11/trunk/customauth/src/main/java/com/tinywebgears/samples/customauth/service/UmsLogoutFilter.java
+END
+UmsAuthenticationProcessingFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/!svn/ver/11/trunk/customauth/src/main/java/com/tinywebgears/samples/customauth/service/UmsAuthenticationProcessingFilter.java
+END
+UmsRememberMeServices.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/11/trunk/customauth/src/main/java/com/tinywebgears/samples/customauth/service/UmsRememberMeServices.java
+END
+UmsUserDetailsService.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/11/trunk/customauth/src/main/java/com/tinywebgears/samples/customauth/service/UmsUserDetailsService.java
+END

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/59/trunk/email-oauth/src/com/tinywebgears/gmailoauth/mail
+END
+LocalEmailService.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/59/trunk/email-oauth/src/com/tinywebgears/gmailoauth/mail/LocalEmailService.java
+END
+OAuthGMailSender.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/59/trunk/email-oauth/src/com/tinywebgears/gmailoauth/mail/OAuthGMailSender.java
+END

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.tinywebgears</groupId>
+  <artifactId>echosample</artifactId>
+  <packaging>pom</packaging>
+  <version>0.0.1</version>
+  <name>Echo Sample</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+
+    <mavenResourcesPluginVersion>2.3</mavenResourcesPluginVersion>
+    <mavenAssemblyPluginVersion>2.2-beta-4</mavenAssemblyPluginVersion>
+    <mavenJarPluginVersion>2.3.1</mavenJarPluginVersion>
+    <mavenWarPluginVersion>2.1</mavenWarPluginVersion>
+    <junitVersion>4.5</junitVersion>
+    <gwtVersion>2.3.0</gwtVersion>
+    <gwtMavenPluginVersion>2.2.0</gwtMavenPluginVersion>
+    <vaadinVersion>6.6.1</vaadinVersion>
+    <log4jVersion>1.2.12</log4jVersion>
+    <slf4jVersion>1.5.6</slf4jVersion>
+    <logbackVersion>0.9.15</logbackVersion>
+    <servletApiVersion>2.5</servletApiVersion>
+    <javaxValidationVersion>1.0.0.GA</javaxValidationVersion>
+
+    <gaeVersion>1.4.3</gaeVersion>
+  </properties>
+
+  <modules>
+    <module>echosample-custom</module>
+    <module>echosample-jar</module>
+    <module>echosample-war</module>
+  </modules>
+
+
+  <dependencyManagement>
+    <dependencies>
+
+      <!-- Logging (compatible with AppEngine) -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4jVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logbackVersion}</version>
+      </dependency>
+
+      <!-- Vaadin -->
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin</artifactId>
+        <version>${vaadinVersion}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>${servletApiVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt-servlet</artifactId>
+        <version>${gwtVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt-user</artifactId>
+        <version>${gwtVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt-dev</artifactId>
+        <version>${gwtVersion}</version>
+      </dependency>
+
+      <!-- GWT -->
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>${javaxValidationVersion}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>${javaxValidationVersion}</version>
+        <classifier>sources</classifier>
+        <scope>provided</scope>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins> 
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${mavenResourcesPluginVersion}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${mavenAssemblyPluginVersion}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>${mavenWarPluginVersion}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>       
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <fork>true</fork>
+          <meminitial>128m</meminitial>
+          <maxmem>512m</maxmem>
+         <source>1.6</source>
+         <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <version>${gwtMavenPluginVersion}</version>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
+

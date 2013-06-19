@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.tinywebgears</groupId>
+	        <artifactId>simplegae</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<artifactId>simplegae-appengine</artifactId>
+	<name>Simple GAE Application :: GAE</name>
+	<packaging>war</packaging>
+
+	<properties>
+		<gaePluginVersion>0.9.0</gaePluginVersion>
+		<gaeHome>${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gaeVersion}/appengine-java-sdk-${gaeVersion}</gaeHome>
+		<gae.application.version>0</gae.application.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- Google App Engine -->
+		<dependency>
+			<groupId>javax.jdo</groupId>
+			<artifactId>jdo2-api</artifactId>
+			<version>${jdoVersion}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.transaction</groupId>
+					<artifactId>transaction-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>${jtaVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine.orm</groupId>
+			<artifactId>datanucleus-appengine</artifactId>
+			<version>${datanucleusAppEngineVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-core</artifactId>
+			<version>${datanucleusCoreVersion}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.transaction</groupId>
+					<artifactId>transaction-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-sdk</artifactId>
+			<version>${gaeVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin</artifactId>
+			<version>${vaadinVersion}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- These dependencies are here just for enabling logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+
+		<!-- Test scope -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Application Dependencies -->
+		<dependency>
+			<groupId>com.tinywebgears</groupId>
+			<artifactId>simplegae-jar</artifactId>
+			<type>jar</type>
+			<version>${pom.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<plugins>
+
+			<!-- Enhancing domain model objects (for datanucleus) -->
+			<plugin>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>maven-datanucleus-plugin</artifactId>
+				<version>${datanucleusEnhancerVersion}</version>
+				<configuration>
+					<!-- Make sure this path contains your persistent classes! -->
+					<mappingIncludes>**/model/*.class</mappingIncludes>
+					<verbose>true</verbose>
+					<enhancerName>ASM</enhancerName>
+					<api>JDO</api>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.datanucleus</groupId>
+						<artifactId>datanucleus-core</artifactId>
+						<version>${datanucleusCoreVersion}</version>
+						<exclusions>
+							<exclusion>
+								<groupId>javax.transaction</groupId>
+								<artifactId>transaction-api</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+					<dependency>
+						<groupId>org.datanucleus</groupId>
+						<artifactId>datanucleus-rdbms</artifactId>
+						<version>${datanucleusRdbmsVersion}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.datanucleus</groupId>
+						<artifactId>datanucleus-enhancer</artifactId>
+						<version>${datanucleusEnhancerVersion}</version>
+					</dependency>
+					<dependency>
+						<groupId>javax.jdo</groupId>
+						<artifactId>jdo2-api</artifactId>
+						<version>${jdoVersion}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<!-- Creating WAR file -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${mavenWarPluginVersion}</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>src/main/webapp</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>**/appengine-web.xml</include>
+							</includes>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+			<!-- The actual maven-gae-plugin. The gaeHome property should be set. -->
+			<plugin>
+				<groupId>net.kindleit</groupId>
+				<artifactId>maven-gae-plugin</artifactId>
+				<version>${gaePluginVersion}</version>
+				<configuration>
+					<sdkDir>${gaeHome}</sdkDir>
+					<port>7070</port>
+					<splitJars>true</splitJars>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.google.appengine.orm</groupId>
+						<artifactId>datanucleus-appengine</artifactId>
+						<version>${datanucleusAppEngineVersion}</version>
+					</dependency>
+					<dependency>
+						<groupId>javax.jdo</groupId>
+						<artifactId>jdo2-api</artifactId>
+						<version>${jdoVersion}</version>
+						<exclusions>
+							<exclusion>
+								<groupId>javax.transaction</groupId>
+								<artifactId>transaction-api</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<!-- Upload application to the appspot automatically, during release:perform -->
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<goals>gae:update</goals>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+	<profiles>
+		<profile>
+			<id>release</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<properties>
+				<gae.application.version>2</gae.application.version>
+			</properties>
+		</profile>
+	</profiles>
+
+	<repositories>
+		<repository>
+			<id>google-maven-repo</id>
+			<name>Google Maven Repository</name>
+			<url>
+        http://google-maven-repository.googlecode.com/svn/repository
+      </url>
+		</repository>
+		<repository>
+			<id>datanucleus-nightly</id>
+			<name>datanucleus.org nightly</name>
+			<url>
+        http://www.datanucleus.org/downloads/maven2-nightly
+      </url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven-gae-plugin-repo</id>
+			<name>maven-gae-plugin repository</name>
+			<url>
+        http://maven-gae-plugin.googlecode.com/svn/repository
+      </url>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>
+

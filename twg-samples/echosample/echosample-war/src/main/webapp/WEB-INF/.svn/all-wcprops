@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/4/trunk/echosample/echosample-war/src/main/webapp/WEB-INF
+END
+logging.properties
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/4/trunk/echosample/echosample-war/src/main/webapp/WEB-INF/logging.properties
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/4/trunk/echosample/echosample-war/src/main/webapp/WEB-INF/web.xml
+END

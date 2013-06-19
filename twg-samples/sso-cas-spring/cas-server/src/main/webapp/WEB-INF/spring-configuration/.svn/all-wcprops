@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/52/trunk/sso-cas-spring/cas-server/src/main/webapp/WEB-INF/spring-configuration
+END
+securityContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/52/trunk/sso-cas-spring/cas-server/src/main/webapp/WEB-INF/spring-configuration/securityContext.xml
+END

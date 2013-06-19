@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/2/trunk/xmlrpcsample/services/src/main/java/com/tinywebgears/samples/xmlrpc
+END
+XmlRpcServerController.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/2/trunk/xmlrpcsample/services/src/main/java/com/tinywebgears/samples/xmlrpc/XmlRpcServerController.java
+END
+ConfiguredBeanProcessorFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/!svn/ver/2/trunk/xmlrpcsample/services/src/main/java/com/tinywebgears/samples/xmlrpc/ConfiguredBeanProcessorFactory.java
+END
+PropertiesHandlerMapping.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/!svn/ver/2/trunk/xmlrpcsample/services/src/main/java/com/tinywebgears/samples/xmlrpc/PropertiesHandlerMapping.java
+END

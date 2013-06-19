@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/32/trunk/gaedownload/gaedownload-appengine/src/main/webapp/WEB-INF
+END
+appengine-web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/31/trunk/gaedownload/gaedownload-appengine/src/main/webapp/WEB-INF/appengine-web.xml
+END
+logging.properties
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/26/trunk/gaedownload/gaedownload-appengine/src/main/webapp/WEB-INF/logging.properties
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/32/trunk/gaedownload/gaedownload-appengine/src/main/webapp/WEB-INF/web.xml
+END

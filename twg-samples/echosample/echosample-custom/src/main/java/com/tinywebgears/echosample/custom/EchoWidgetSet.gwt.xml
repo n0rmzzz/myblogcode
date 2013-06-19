@@ -1,0 +1,10 @@
+<module>
+
+	<!-- Inherit super widgetset -->
+	<inherits name="com.vaadin.terminal.gwt.DefaultWidgetSet" />
+
+	<!-- WidgetSet default theme -->
+	<stylesheet src="echowidgetset/styles.css" />
+
+</module>
+

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/29/trunk/gaedownload/gaedownload-jar/src/main/java/com/tinywebgears/gaedownload/core/service
+END
+ServiceIF.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/26/trunk/gaedownload/gaedownload-jar/src/main/java/com/tinywebgears/gaedownload/core/service/ServiceIF.java
+END
+ServiceException.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/!svn/ver/26/trunk/gaedownload/gaedownload-jar/src/main/java/com/tinywebgears/gaedownload/core/service/ServiceException.java
+END
+UserServicesIF.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/!svn/ver/29/trunk/gaedownload/gaedownload-jar/src/main/java/com/tinywebgears/gaedownload/core/service/UserServicesIF.java
+END
+AbstractService.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/!svn/ver/26/trunk/gaedownload/gaedownload-jar/src/main/java/com/tinywebgears/gaedownload/core/service/AbstractService.java
+END
+DefaultUserServices.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/!svn/ver/29/trunk/gaedownload/gaedownload-jar/src/main/java/com/tinywebgears/gaedownload/core/service/DefaultUserServices.java
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/9/trunk/contextsample/services/src/main/webapp/WEB-INF
+END
+beans.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/6/trunk/contextsample/services/src/main/webapp/WEB-INF/beans.xml
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/6/trunk/contextsample/services/src/main/webapp/WEB-INF/web.xml
+END
+log4j.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/9/trunk/contextsample/services/src/main/webapp/WEB-INF/log4j.xml
+END

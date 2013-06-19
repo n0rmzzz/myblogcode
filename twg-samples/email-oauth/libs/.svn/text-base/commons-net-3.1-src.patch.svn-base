@@ -1,0 +1,34 @@
+diff -ru commons-net-3.1-src/src/main/java/org/apache/commons/net/smtp/AuthenticatingSMTPClient.java commons-net-3.1-src-patched/src/main/java/org/apache/commons/net/smtp/AuthenticatingSMTPClient.java
+--- commons-net-3.1-src/src/main/java/org/apache/commons/net/smtp/AuthenticatingSMTPClient.java	2012-02-15 03:11:49.000000000 +1100
++++ commons-net-3.1-src-patched/src/main/java/org/apache/commons/net/smtp/AuthenticatingSMTPClient.java	2012-07-25 00:36:30.809267711 +1000
+@@ -208,6 +208,10 @@
+             }
+             return SMTPReply.isPositiveCompletion(sendCommand(
+                 new String(Base64.encodeBase64(password.getBytes()))));
++        }
++        else if (method.equals(AUTH_METHOD.XOAUTH))
++        {
++            return SMTPReply.isPositiveIntermediate(sendCommand(username));
+         } else {
+             return false; // safety check
+         }
+@@ -243,7 +247,9 @@
+         /** The standarised (RFC2195) CRAM-MD5 method, which doesn't send the password (secure). */
+         CRAM_MD5,
+         /** The unstandarised Microsoft LOGIN method, which sends the password unencrypted (insecure). */
+-        LOGIN;
++        LOGIN,
++        /** XOAuth method which accepts a signed and base64ed OAuth URL. */
++        XOAUTH;
+ 
+         /**
+          * Gets the name of the given authentication method suitable for the server.
+@@ -258,6 +264,8 @@
+                 return "CRAM-MD5";
+             } else if (method.equals(AUTH_METHOD.LOGIN)) {
+                 return "LOGIN";
++            } else if (method.equals(AUTH_METHOD.XOAUTH)) {
++                return "XOAUTH";
+             } else {
+                 return null;
+             }

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/12/trunk/simplegae/simplegae-jar/src/main/java/com/tinywebgears/simplegae/core/dao
+END
+PMFHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/12/trunk/simplegae/simplegae-jar/src/main/java/com/tinywebgears/simplegae/core/dao/PMFHolder.java
+END
+DataPersistenceException.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/!svn/ver/12/trunk/simplegae/simplegae-jar/src/main/java/com/tinywebgears/simplegae/core/dao/DataPersistenceException.java
+END
+UserRepository.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/12/trunk/simplegae/simplegae-jar/src/main/java/com/tinywebgears/simplegae/core/dao/UserRepository.java
+END

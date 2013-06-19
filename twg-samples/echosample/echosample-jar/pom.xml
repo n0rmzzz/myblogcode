@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.tinywebgears</groupId>
+    <artifactId>echosample</artifactId>
+    <version>0.0.1</version>
+  </parent>
+
+  <artifactId>echosample-jar</artifactId>
+  <name>Echo Sample :: Jar</name>
+  <packaging>jar</packaging>
+
+  <dependencies>
+
+    <!-- Logging -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+
+    <!-- Vaadin -->
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-servlet</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+    </dependency>
+
+    <!-- AppEngine -->
+    <dependency>
+      <groupId>com.google.appengine</groupId>
+      <artifactId>appengine-api-1.0-sdk</artifactId>
+      <version>${gaeVersion}</version>
+    </dependency>
+
+    <!-- Echo Sample Custom Components -->
+    <dependency>
+      <groupId>com.tinywebgears</groupId>
+      <artifactId>echosample-custom</artifactId>
+      <type>jar</type>
+      <version>${pom.version}</version>
+    </dependency>
+
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>google-maven-repo</id>
+      <name>Google Maven Repository</name>
+      <url>http://google-maven-repository.googlecode.com/svn/repository</url>
+    </repository>
+    <repository>
+      <id>datanucleus-nightly</id>
+      <name>datanucleus.org nightly</name>
+      <url>http://www.datanucleus.org/downloads/maven2-nightly</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>maven-gae-plugin-repo</id>
+      <name>maven-gae-plugin repository</name>
+      <url>http://maven-gae-plugin.googlecode.com/svn/repository</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+</project>

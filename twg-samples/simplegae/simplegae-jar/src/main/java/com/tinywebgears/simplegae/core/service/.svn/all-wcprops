@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/14/trunk/simplegae/simplegae-jar/src/main/java/com/tinywebgears/simplegae/core/service
+END
+ServiceIF.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/12/trunk/simplegae/simplegae-jar/src/main/java/com/tinywebgears/simplegae/core/service/ServiceIF.java
+END
+ServiceException.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/!svn/ver/12/trunk/simplegae/simplegae-jar/src/main/java/com/tinywebgears/simplegae/core/service/ServiceException.java
+END
+UserServicesIF.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/!svn/ver/14/trunk/simplegae/simplegae-jar/src/main/java/com/tinywebgears/simplegae/core/service/UserServicesIF.java
+END
+AbstractService.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/12/trunk/simplegae/simplegae-jar/src/main/java/com/tinywebgears/simplegae/core/service/AbstractService.java
+END
+DefaultUserServices.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/!svn/ver/14/trunk/simplegae/simplegae-jar/src/main/java/com/tinywebgears/simplegae/core/service/DefaultUserServices.java
+END

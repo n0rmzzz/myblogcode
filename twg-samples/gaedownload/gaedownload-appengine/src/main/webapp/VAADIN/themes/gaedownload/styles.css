@@ -1,0 +1,13 @@
+/*
+ * This stylesheet extends/overrides the default stylesheet
+ * Note: when overriding a styleclass you do not
+ * need to include original styles, only those
+ * changed (adding original lines can also cause
+ * problems when resources are referred to by a
+ * relative url no longer valid from this
+ * stylesheets location). When adding styles
+ * please add comment at start with your name and
+ * how many lines added
+ */
+@import "../reindeer/styles.css";
+

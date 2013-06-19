@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/!svn/ver/25/trunk/simplegae
+END
+deploy-gae.sh
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/14/trunk/simplegae/deploy-gae.sh
+END
+run-gae.sh
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/21/trunk/simplegae/run-gae.sh
+END
+install-gae-sdk.sh
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/25/trunk/simplegae/install-gae-sdk.sh
+END
+pom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/21/trunk/simplegae/pom.xml
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/21/trunk/simplegae/README.txt
+END

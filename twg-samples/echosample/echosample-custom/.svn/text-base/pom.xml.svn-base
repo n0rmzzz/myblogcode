@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>com.tinywebgears</groupId>
+    <artifactId>echosample</artifactId>
+    <version>0.0.1</version>
+  </parent>
+
+  <artifactId>echosample-custom</artifactId>
+  <name>Echo Sample :: Custom Components</name>
+  <packaging>jar</packaging>
+ 
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <version>${gwtMavenPluginVersion}</version>
+        <configuration>
+          <!-- if you don't specify any modules, the plugin will find them -->
+          <!-- <modules> <module>your.company.gwt.MyWidgetSet</module> </modules> -->
+	      <webappDirectory>${project.build.directory}/classes/VAADIN/widgetsets</webappDirectory>
+          <!-- On Mac running Snow Leopard, add "-d32" -->
+          <!-- This causes error messages (but build works) in phase "package": two processes would use the same debug 
+            port -->
+          <!--extraJvmArgs>-Xmx512M -Xss1024k -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8998</extraJvmArgs -->
+          <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+          <!--<runTarget>project-name</runTarget>
+          <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
+          <noServer>true</noServer>
+          <port>8080</port>
+          <compileReport>false</compileReport>-->
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>resources</goal>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwtVersion}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${mavenJarPluginVersion}</version>
+        <configuration>
+          <archive>
+            <index>true</index>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <!-- Implementation-Title and Implementation-Version come from the POM by default -->
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+            </manifest>
+            <manifestEntries>
+              <!-- Package format version - do not change -->
+              <Vaadin-Package-Version>1</Vaadin-Package-Version>
+
+              <!-- Add-on specific fields to update -->
+
+              <!-- Implementation-Title and Implementation-Version come from the POM by default -->
+              <!--
+                <Implementation-Title>${pom.name}</Implementation-Title>
+                <Implementation-Version>${pom.version}</Implementation-Version>
+              -->
+
+              <!-- Comma-separated list of widgetsets in the package -->
+              <Vaadin-Widgetsets>com.tinywebgears.echosample.custom.TuataraWidgetSet</Vaadin-Widgetsets>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+  <dependencies>
+
+    <!-- Logging -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+
+    <!-- Vaadin -->
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-servlet</artifactId>
+      <version>${gwtVersion}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+      <version>${gwtVersion}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-dev</artifactId>
+      <version>${gwtVersion}</version>
+    </dependency>
+
+    <!-- GWT -->
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <classifier>sources</classifier>
+      <scope>provided</scope>
+    </dependency>
+
+  </dependencies>
+  
+</project>
+

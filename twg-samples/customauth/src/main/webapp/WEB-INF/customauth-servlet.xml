@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    ">
+
+	<!-- no 'id' required, HandlerMapping beans are automatically detected by 
+		the DispatcherServlet -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/*.htm">urlController</prop>
+				<prop key="/*.do">actionController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="actionController"
+		class="com.tinywebgears.samples.customauth.controller.ActionController" />
+
+	<bean id="urlController"
+		class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
+
+	<!-- as we have our jsp in an internal place forcing all requests through 
+		spring, use viewResolver to save us making reference to internal structure 
+		everywhere e.g. /WEB-INF/jsp/ -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="attributes">
+			<props>
+				<prop key="message">Static Message</prop>
+			</props>
+		</property>
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+</beans>

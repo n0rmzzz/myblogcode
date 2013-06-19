@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/61/trunk/email-oauth/src/com/tinywebgears/gmailoauth/util
+END
+OAuthHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/59/trunk/email-oauth/src/com/tinywebgears/gmailoauth/util/OAuthHelper.java
+END
+OAuthBuilder.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/59/trunk/email-oauth/src/com/tinywebgears/gmailoauth/util/OAuthBuilder.java
+END
+OAuthHelperV1.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/61/trunk/email-oauth/src/com/tinywebgears/gmailoauth/util/OAuthHelperV1.java
+END
+UriUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/59/trunk/email-oauth/src/com/tinywebgears/gmailoauth/util/UriUtil.java
+END

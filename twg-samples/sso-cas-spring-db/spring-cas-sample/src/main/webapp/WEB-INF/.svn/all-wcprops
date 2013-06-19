@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/54/trunk/sso-cas-spring-db/spring-cas-sample/src/main/webapp/WEB-INF
+END
+applicationContext-security.xml
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/54/trunk/sso-cas-spring-db/spring-cas-sample/src/main/webapp/WEB-INF/applicationContext-security.xml
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/53/trunk/sso-cas-spring-db/spring-cas-sample/src/main/webapp/WEB-INF/web.xml
+END

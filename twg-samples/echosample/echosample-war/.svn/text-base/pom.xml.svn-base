@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.tinywebgears</groupId>
+    <artifactId>echosample</artifactId>
+    <version>0.0.1</version>
+  </parent>
+
+  <artifactId>echosample-war</artifactId>
+  <name>Echo Sample :: War</name>
+  <packaging>war</packaging>
+
+  <dependencies>
+
+    <!-- Vaadin -->
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin</artifactId>
+      <version>${vaadinVersion}</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <!-- These dependencies are here just for enabling logging -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+
+    <!-- Application Dependencies -->
+    <dependency>
+      <groupId>com.tinywebgears</groupId>
+      <artifactId>echosample-jar</artifactId>
+      <type>jar</type>
+      <version>${pom.version}</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+
+    <plugins>
+
+      <!-- Creating WAR file -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>${mavenWarPluginVersion}</version>
+        <configuration>
+          <webResources>
+            <resource>
+              <directory>src/main/webapp</directory>
+              <filtering>true</filtering>
+            </resource>
+          </webResources>
+        </configuration>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+</project>

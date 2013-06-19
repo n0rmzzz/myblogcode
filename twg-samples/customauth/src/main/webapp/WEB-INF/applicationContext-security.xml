@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+	  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+      ">
+
+	<global-method-security secured-annotations="disabled" />
+
+	<beans:bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<beans:property name="location">
+			<beans:value>classpath:ums.properties</beans:value>
+		</beans:property>
+	</beans:bean>
+
+	<!-- Filters -->
+
+	<beans:bean id="rememberMeFilter"
+		class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
+		<!-- custom-filter position="REMEMBER_ME_FILTER"/ -->
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="rememberMeServices" ref="umsRememberMeServices" />
+	</beans:bean>
+
+	<beans:bean id="umsLogoutFilter"
+		class="com.tinywebgears.samples.customauth.service.UmsLogoutFilter">
+		<!-- custom-filter position="LOGOUT_FILTER" / -->
+		<beans:constructor-arg value="/login.jsp?loggedout=true" />
+		<beans:constructor-arg>
+			<beans:list>
+				<beans:ref bean="umsRememberMeServices" />
+				<beans:bean id="logoutHandler"
+					class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler">
+				</beans:bean>
+			</beans:list>
+		</beans:constructor-arg>
+		<beans:property name="cookieName" value="${Ums.SSO.Cookie.Name}" />
+		<beans:property name="filterProcessesUrl" value="/j_spring_security_logout" />
+	</beans:bean>
+
+	<beans:bean id="authenticationEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/login.jsp" />
+	</beans:bean>
+
+	<beans:bean id="umsAuthenticationProcessingFilter"
+		class="com.tinywebgears.samples.customauth.service.UmsAuthenticationProcessingFilter">
+		<beans:property name="cookieName" value="${Ums.SSO.Cookie.Name}" />
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="umsUserDetailsService" ref="umsUserDetailsService" />
+		<beans:property name="authenticationSuccessHandler">
+			<beans:bean id="authenticationSuccessHandler"
+				class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler"
+				p:alwaysUseDefaultTargetUrl="false" p:defaultTargetUrl="/home.htm" />
+		</beans:property>
+		<beans:property name="authenticationFailureHandler">
+			<beans:bean id="authenticationFailureHandler"
+				class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
+				p:defaultFailureUrl="/login.jsp?authfailed=true" />
+		</beans:property>
+	</beans:bean>
+
+
+	<!-- Authentication Manager -->
+
+	<!-- This will override the settings of authentication manager bean. -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="umsUserDetailsService">
+			<password-encoder hash="sha" base64="true" />
+		</authentication-provider>
+		<authentication-provider ref="rememberMeAuthenticationProvider" />
+	</authentication-manager>
+
+
+	<!-- Beans and Providers -->
+
+	<beans:bean id="umsUserDetailsService"
+		class="com.tinywebgears.samples.customauth.service.UmsUserDetailsService">
+	</beans:bean>
+
+	<beans:bean id="rememberMeAuthenticationProvider"
+		class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+		<!-- This ensures that remember-me is added as an authentication provider -->
+		<beans:property name="key" value="${Ums.SSO.Cookie.Key}" />
+	</beans:bean>
+
+	<beans:bean id="umsRememberMeServices"
+		class="com.tinywebgears.samples.customauth.service.UmsRememberMeServices">
+		<beans:property name="userDetailsService" ref="umsUserDetailsService" />
+		<beans:property name="cookieName" value="${Ums.SSO.Cookie.Name}" />
+		<beans:property name="key" value="${Ums.SSO.Cookie.Key}" />
+	</beans:bean>
+
+</beans:beans>
